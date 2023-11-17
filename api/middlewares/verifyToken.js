@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
             }
         })
      } else {
-        res.status(401).json("you are not authorized to this!")
+        res.status(401).json("you are not authorized to do this!")
      }
 }
 
