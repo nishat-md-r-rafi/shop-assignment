@@ -1,5 +1,5 @@
 .navContainer{
-    background-color: #427bf5;
+    background-color: rgb(80, 187, 187);
     color: whitesmoke;
     padding: 1rem 2rem;
     display: flex;
@@ -12,4 +12,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.7rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    
 }
