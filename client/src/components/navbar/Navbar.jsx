@@ -8,12 +8,11 @@ export  const Navbar = () => {
     <div className='navContainer'>
         <div>logo</div>
         <div className='userInfo'>
-            <Link>Register</Link>
             <Link to="/login">login</Link>
             <Link to='/user'>
               users
             </Link>
-            <Link to="/item">item</Link>
+            <Link to="/item">items</Link>
             <MdOutlineAccountCircle />
         </div>
     </div>

@@ -27,7 +27,7 @@ export  function InfoTable({columns}) {
       field: "action", headerName: "Actions", width: 200, renderCell: (params) => {
         return (
           <div className='cellActions'>
-            <Link to={`/new${location.pathname}/${params.row.id}`} className='updateButton'>Update</Link>
+            <Link to={`/update${location.pathname}/${params.row.id}`} className='updateButton'>Update</Link>
             <div className='deleteButton' onClick={() => handleDelete(params.row.id)}>Delete</div>
           </div>
         )

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { FaGoogle, FaGithub } from "react-icons/fa";
 import './login.css'
 
 export const Login = () => {
@@ -17,12 +16,6 @@ export const Login = () => {
             <div className="form-container sign-up">
                 <form onSubmit={handleSignUp}>
                     <h1>Create Account</h1>
-                    <div className="social-icons">
-                        <p><FaGoogle/></p>
-                        <p><FaGoogle/></p>
-                      
-                    </div>
-                    <span>or use your email for registeration</span>
                     <input type="text" placeholder="Name"/>
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
@@ -33,11 +26,6 @@ export const Login = () => {
             <div className="form-container sign-in">
                 <form onSubmit={handleSignIn}>
                     <h1>Sign In</h1>
-                    <div className="social-icons">
-                        <p><FaGoogle/></p>
-                        <p><FaGoogle/></p>
-                    </div>
-                    <span>or use your email password</span>
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
                     <a >Forget Your Password?</a>
