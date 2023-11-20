@@ -1,20 +1,21 @@
 const router = require("express").Router();
 const User = require("../models/User")
 const {verifyToken, veryfyTokenAuthorization} = require("../middlewares/verifyToken")
+const CryptoJS = require("crypto-js")
 
 
 // get all users
-router.get("/all",async (req, res) => {  
+router.get("/",async (req, res) => {  
     const allUsers = await User.find()
     res.status(200).json(allUsers)
 })
 
 // update user
-router.put("/:id", veryfyTokenAuthorization , async (req, res) => {  
+router.patch("/:id", async (req, res) => {  
     if (req.body.password) {
-        req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SECRET).toString();
+        req.body.password = CryptoJS.AES.encrypt(req.body?.password , process.env.PASS_SECRET).toString() || "";
     }
-
+    console.log(req.body)
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             $set: req.body
@@ -26,7 +27,7 @@ router.put("/:id", veryfyTokenAuthorization , async (req, res) => {
 })
 
 //DELETE
-router.delete("/:id", veryfyTokenAuthorization, async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(200).json("User is deleted...");

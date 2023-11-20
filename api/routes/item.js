@@ -8,6 +8,7 @@ const router = require("express").Router();
 
 //CREATE
 router.post("/", async (req, res) => {
+  console.log(req.body)
   const newItem = new Item(req.body);
 
   try {
@@ -19,7 +20,7 @@ router.post("/", async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyToken, async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const updatedItem = await Item.findByIdAndUpdate(
       req.params.id,
@@ -35,7 +36,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", verifyToken, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Item.findByIdAndDelete(req.params.id);
     res.status(200).json("Item has been deleted...");

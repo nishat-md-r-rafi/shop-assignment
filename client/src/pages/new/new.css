@@ -7,6 +7,7 @@ flex-direction: column;
 h1 {
 color: rgb(148, 141, 141);
 font-size: 20px;
+text-transform: capitalize;
 }
 
 
@@ -35,7 +36,7 @@ label {
 display: flex;
 align-items: center;
 gap: 10px;
-
+text-transform: capitalize;
 }
 
 input {

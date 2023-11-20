@@ -21,9 +21,9 @@ mongoose.connect(uri)
 // middlewares                       
 app.use(cors())
 app.use(express.json()) 
-app.use("/api/users", userRouter)
-app.use("/api/items", itemRouter)
-app.use("/api/auth", authRouter)
+app.use("/users", userRouter)
+app.use("/items", itemRouter)
+app.use("/auth", authRouter)
 
 // error handling
 
