@@ -5,8 +5,9 @@ import { useAddUserMutation, useUpdateUserMutation } from "../../features/users/
 import { useAddItemMutation, useUpdateItemMutation } from "../../features/items/itemsApi";
 
 export const New = ({inputs, name:formName, type}) => {
+
+
     const path = useLocation()
-    // console.log(path.pathname.split("/")[3])
     const id = path.pathname.split("/")[3]
 
     // call the hooks
@@ -17,23 +18,20 @@ export const New = ({inputs, name:formName, type}) => {
 
     const [value, setValue] = useState({})
 
+
     const handleFormSubmit = (e) => {  
         e.preventDefault()  
         if (type==="new") {
             if (path.pathname.includes("user")) {
                 addUser(value)
-                console.log("new user")
             } else {
                 addItem(value)
-                console.log("new item")
             }
         } else {
             if (path.pathname.includes("user")) {
                 updateUser({id, data:value})
-                console.log("update user")
             } else {
                 updateItem({id, data:value})
-                console.log("update item")
             }
         }
     }
@@ -49,6 +47,8 @@ export const New = ({inputs, name:formName, type}) => {
             }
         })
     }
+
+    
     
 
 
@@ -60,12 +60,20 @@ export const New = ({inputs, name:formName, type}) => {
         <div className="bottom">
 
         <form onSubmit={handleFormSubmit}>
-            {inputs.map((input) => (
-            <div className="formInput" key={input.id}>
-                <label>{input.label}</label>
-                <input name={input.label} type={input.type} placeholder={input.placeholder} onChange={handleValueChnage} />
-            </div>
-            ))}
+            {inputs.map((input) => {
+                const {label, errorMessage, ...rest} = input;
+                return (
+                    <div className="formInput" key={input.id}>
+                        <label>{label}</label>
+                        <input 
+                            name={label} {...rest} 
+                            onChange={handleValueChnage} 
+                            required={type==="new" ? true : false}
+                        />
+                        <span>{errorMessage}</span>
+                    </div>
+                )
+            })}
             <button className="newButton">Send</button>
         </form>
         </div>
