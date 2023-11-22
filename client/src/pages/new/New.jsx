@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useAddUserMutation, useUpdateUserMutation } from "../../features/users/usersApi";
 import { useAddItemMutation, useUpdateItemMutation } from "../../features/items/itemsApi";
+import { FormInput } from "../../components/formInput/FormInput";
 
 export const New = ({inputs, name:formName, type}) => {
 
@@ -59,24 +60,14 @@ export const New = ({inputs, name:formName, type}) => {
         </div>
         <div className="bottom">
 
-        <form onSubmit={handleFormSubmit}>
-            {inputs.map((input) => {
-                const {label, errorMessage, ...rest} = input;
-                return (
-                    <div className="formInput" key={input.id}>
-                        <label>{label}</label>
-                        <input 
-                            name={label} {...rest} 
-                            onChange={handleValueChnage} 
-                            required={type==="new" ? true : false}
-                        />
-                        <span>{errorMessage}</span>
-                    </div>
-                )
-            })}
+            <form onSubmit={handleFormSubmit}>
+                {inputs.map((input) => (
+                    <FormInput input={input} handleValueChnage={handleValueChnage} type={type}/>
+                ))}
             <button className="newButton">Send</button>
-        </form>
+            </form>
         </div>
-    </div>
-  )
-}
+        </div>
+        )
+    }
+    

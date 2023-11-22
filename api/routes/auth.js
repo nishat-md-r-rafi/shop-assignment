@@ -12,6 +12,8 @@ router.post("/register", async (req, res) => {
         created_by: req.body.created_by,
     })
 
+    console.log(newUser)
+
     try {
         const savedUser = await newUser.save();
         res.status(201).json(savedUser)     
