@@ -2,7 +2,7 @@ import "./infotable.css"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Loading } from "../loading/Loading";
 import { useDeleteItemMutation } from "../../features/items/itemsApi";
 import { useDeleteUserMutation } from "../../features/users/usersApi";
@@ -20,6 +20,7 @@ export  function InfoTable({columns, rows, isLoading, isSuccess}) {
   const location = useLocation();
 
   const [query, setQuery] = useState("")
+  const navigate = useNavigate();
 
   const handleToast = (result, type, action) => {  
     if ("error" in result){
