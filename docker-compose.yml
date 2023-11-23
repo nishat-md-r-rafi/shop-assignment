@@ -1,0 +1,37 @@
+version: '3.8'
+
+
+services:
+  api:
+    build: 
+      dockerfile: Dockerfile
+      context: ./api
+    container_name: api
+    restart: always
+    ports:
+      -'4000:4000'
+
+    env_file:
+      - ./api/.env
+    volumes:
+      - './api: /api'
+      - /api/node_modules
+  
+  client:
+    build: 
+      dockerfile: Dockerfile
+      context: ./client
+    
+    container_name: client
+
+    ports:
+      - '3000:3000'
+    
+    volumes:
+      - ./client: /client
+      - /client/node_modules
+
+    depends_on:
+      - api
+
+  
