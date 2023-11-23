@@ -78,7 +78,7 @@ export const New = ({inputs, name:formName, type}) => {
         }
     }
 
-    const handleValueChnage = (e) => {  
+    const handleValueChange = (e) => {  
         setValue((prev) => {  
             return {
                 ...prev,
@@ -100,7 +100,7 @@ export const New = ({inputs, name:formName, type}) => {
 
             <form onSubmit={handleFormSubmit}>
                 {inputs.map((input) => (
-                    <FormInput input={input} handleValueChnage={handleValueChnage} type={type} key={input.id}/>
+                    <FormInput input={input} handleValueChange={handleValueChange} type={type} key={input.id}/>
                 ))}
             <button className="newButton">Send</button>
             </form>

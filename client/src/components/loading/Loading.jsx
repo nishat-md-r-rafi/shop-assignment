@@ -16,9 +16,4 @@ export const Loading = props => (
   </ContentLoader>
 )
 
-Loading.metadata = {
-  name: 'Nic Bovee', // My name
-  github: 'ghettifish', // Github username
-  description: 'A simple favorite from the DoorDash local favorites.', // Little tagline
-  filename: 'DoorDashFavorite', // filename of your loader
-}
+

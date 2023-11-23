@@ -106,7 +106,7 @@ export const Login = () => {
                     <h1>Create </h1>
                         {
                            signUpInputs.map((input) => (
-                            <FormInput input={input} handleValueChnage={handleChange} key={input.id}/>
+                            <FormInput input={input} handleValueChange={handleChange} key={input.id}/>
                            )) 
                         }
                     <button>Sign Up</button>
@@ -119,7 +119,7 @@ export const Login = () => {
                     <h1>Sign In</h1>
                     {
                         singInInputs.map((input) => (
-                         <FormInput input={input} handleValueChnage={handleChange} key={input.id}/>
+                         <FormInput input={input} handleValueChange={handleChange} key={input.id}/>
                         )) 
                      }
                     <button>Sign In</button>

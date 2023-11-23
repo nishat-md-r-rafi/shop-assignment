@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./formInput.css"
 
-export const FormInput = ({input, handleValueChnage, type}) => {
+export const FormInput = ({input, handleValueChange, type}) => {
 
   const [focused, setFocused] = useState(false)
   const {label, errorMessage, ...rest} = input;
@@ -13,7 +13,7 @@ export const FormInput = ({input, handleValueChnage, type}) => {
         <label>{label}</label>
         <input 
             name={label} {...rest} 
-            onChange={handleValueChnage} 
+            onChange={handleValueChange} 
             required={type==="new" ? true : false}
             onBlur={handleFocus}
             focused={focused.toString()}
