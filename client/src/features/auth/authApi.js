@@ -16,17 +16,20 @@ const authApi = apiSlice.injectEndpoints({
                 try {
                     const result = await queryFulfilled;
 
+                    const {accessToken, ...user} = result.data
+
                     //set user to localStorage
                     localStorage.setItem("auth", JSON.stringify({
                         accessToken: result.data.accessToken,
-                        user: result.data.user
+                        user: user
                     }));
+                    
 
                     // store to redux store
                     dispatch(userLoggedIn(
                         {    
                         accessToken: result.data.accessToken,
-                        user: result.data.user
+                        user: user
                         }
                     ));
                 } catch (e) {
@@ -46,7 +49,7 @@ const authApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg , {queryFulfilled, dispatch}){
                 try {
                     const result = await queryFulfilled;
-                    console.log(result);
+                    const {accessToken, ...user} = result?.data
 
                     // set Local Storage
                     localStorage.setItem(
@@ -54,7 +57,7 @@ const authApi = apiSlice.injectEndpoints({
                         JSON.stringify(
                             {
                                 accessToken: result.data.accessToken,
-                                user : result.data.user,
+                                user : user,
                             }
                         )
                     );
@@ -62,7 +65,7 @@ const authApi = apiSlice.injectEndpoints({
                     dispatch(userLoggedIn(
                         {
                             accessToken: result.data.accessToken,
-                            user : result.data.user,
+                            user : user,
                         }
                     ));
                 } catch (e) {

@@ -1,15 +1,21 @@
 import "./new.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAddUserMutation, useUpdateUserMutation } from "../../features/users/usersApi";
 import { useAddItemMutation, useUpdateItemMutation } from "../../features/items/itemsApi";
 import { FormInput } from "../../components/formInput/FormInput";
+import { useSelector } from "react-redux";
 
 export const New = ({inputs, name:formName, type}) => {
 
 
     const path = useLocation()
     const id = path.pathname.split("/")[3]
+    const user = useSelector(state=> state.auth.user)
+    const navigate = useNavigate()
+
 
     // call the hooks
     const [ addUser, {isError: isAddUserError, isLoading: isAddUserLoading, isSuccess: isAddUserSuccess, error: addUserError}] = useAddUserMutation();
@@ -18,29 +24,61 @@ export const New = ({inputs, name:formName, type}) => {
     const [ updateItem, {isError: isUpdateItemError, isLoading: isUpdateItemLoading, isSuccess: isUpdateItemSuccess, error: updateItemError}] = useUpdateItemMutation();
 
     const [value, setValue] = useState({})
+    let result = null;
+
+    const handleToast = (result, type, action) => {  
+        if ("error" in result){
+            toast.error(result?.error?.data, {
+                position: "top-center",
+                autoClose: 500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        }else{
+            toast.success(`${type} ${action} successfully!`, {
+                position: "top-center",
+                autoClose: 500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+
+                setTimeout(() => {
+                    navigate(`/${type}`);
+                }, 500);
+        }
+    }
 
 
-    const handleFormSubmit = (e) => {  
+    const handleFormSubmit = async (e) => {  
         e.preventDefault()  
         if (type==="new") {
             if (path.pathname.includes("user")) {
-                addUser(value)
+                result = await addUser({...value, created_by: user.name})  
+                handleToast(result,"user", "create") 
             } else {
-                addItem(value)
+                result = await addItem({...value, created_by: user.name})
+                handleToast(result,"item", "create") 
             }
         } else {
             if (path.pathname.includes("user")) {
-                updateUser({id, data:value})
+               result = await updateUser({id, data:value})
+               handleToast(result,"user", "update") 
             } else {
-                updateItem({id, data:value})
+                result = await updateItem({id, data:value})
+                handleToast(result,"item", "update") 
             }
         }
     }
 
     const handleValueChnage = (e) => {  
-        console.log(value)
-
-
         setValue((prev) => {  
             return {
                 ...prev,
@@ -62,12 +100,25 @@ export const New = ({inputs, name:formName, type}) => {
 
             <form onSubmit={handleFormSubmit}>
                 {inputs.map((input) => (
-                    <FormInput input={input} handleValueChnage={handleValueChnage} type={type}/>
+                    <FormInput input={input} handleValueChnage={handleValueChnage} type={type} key={input.id}/>
                 ))}
             <button className="newButton">Send</button>
             </form>
         </div>
-        </div>
-        )
+
+        <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+        />
+    </div>
+    )
     }
     

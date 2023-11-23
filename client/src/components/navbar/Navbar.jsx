@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import './navbar.css'
 import { MdOutlineAccountCircle } from "react-icons/md"
 import { useDispatch, useSelector } from 'react-redux'
+import { userLoggedOut } from '../../features/auth/authSlice'
 
 
 export  const Navbar = () => {
@@ -9,25 +10,24 @@ export  const Navbar = () => {
   const dispatch = useDispatch()
   const userInfo = useSelector((state) => state.auth)
   const logOut = () => { 
-    console.log("logout")
+    dispatch(userLoggedOut());
+    localStorage.clear();
   }
-  console.log(userInfo)
+  
   return (
     <div className='navContainer'>
         <div>logo</div>
         <div className='userInfo'>
-            {userInfo.user ? <>
-              <Link onClick={logOut}>logout</Link>
-                <Link to='/user'>
-                  users
-                </Link>
-              <Link to="/item">items</Link>
-              <MdOutlineAccountCircle />
-              </> :
-
-              <Link to="/login">login</Link>
-            
+            {userInfo.accessToken && <>
+                              <Link onClick={logOut}>logout</Link>
+                              <Link to='/user'>
+                                users
+                              </Link>
+                              <Link to="/item">items</Link>
+                              <MdOutlineAccountCircle />
+                            </> 
             }
+                          
             
         </div>
     </div>

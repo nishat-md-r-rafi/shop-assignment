@@ -14,9 +14,6 @@ export const userInputs = [
         type: "password", 
         placeholder: "enter your password"
     },
-    // {
-    //     id: 4, label: "created_by", type: "text", placeholder: "enter name"
-    // },
 ]
 export const updateUserInputs = [
     {
@@ -29,7 +26,7 @@ export const updateUserInputs = [
         id: 3, 
         errorMessage: "should be 4-20, 1 letter, 1 number, 1 special character!",  
         label: "password",
-        pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+        pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,20}$`,
         required: true, 
         type: "password", 
         placeholder: "1 letter, 1 number and 1 special character!"
@@ -41,17 +38,11 @@ export const itemInputs = [
     {
         id: 1, label: "name" ,errorMessage: "should be 3-16 without special character!", pattern: "^[A-Za-z0-9]{3,16}$", type: "text", placeholder: "cloth"
     },
-    {
-        id: 4, label: "created_by", type: "text", placeholder: "enter name"
-    }, 
 ]
 
 export const updateItemInputs = [
     {
         id: 1, label: "name" ,errorMessage: "should be 3-16 without special character!", pattern: "^[A-Za-z0-9]{3,16}$", type: "text", placeholder: "cloth"
-    },
-    {
-        id: 3, label: "created_by", type: "text", placeholder: "enter name"
     },
 ]
 
@@ -63,14 +54,11 @@ export const singInInputs = [
         id: 3, 
         errorMessage: "should be 4-20, 1 letter, 1 number, 1 special character!",  
         label: "password",
-        pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,20}$`,
+        // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,20}$`,
         required: true, 
         type: "password", 
         placeholder: "enter your password"
     },
-    // {
-    //     id: 4, label: "created_by", type: "text", placeholder: "enter name"
-    // },
 ]
 
 export const signUpInputs = [
@@ -89,7 +77,4 @@ export const signUpInputs = [
         type: "password", 
         placeholder: "enter your password"
     },
-    // {
-    //     id: 4, label: "created_by", type: "text", placeholder: "enter name"
-    // },
 ]

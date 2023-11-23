@@ -7,8 +7,7 @@ const {
 const router = require("express").Router();
 
 //CREATE
-router.post("/", async (req, res) => {
-  console.log(req.body)
+router.post("/", async (req, res) => {  
   const newItem = new Item(req.body);
 
   try {
@@ -57,6 +56,7 @@ router.get("/:id", async (req, res) => {
 
 //GET ALL PRODUCTS
 router.get("/", async (req, res) => {
+  const {search} = req.query;
   try {
     const items = await Item.find()
     res.status(200).json(items);

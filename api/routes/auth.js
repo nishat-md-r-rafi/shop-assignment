@@ -18,6 +18,7 @@ router.post("/register", async (req, res) => {
         const savedUser = await newUser.save();
         res.status(201).json(savedUser)     
     } catch (error) {
+        console.log(error)
         res.status(500).json(error) 
     }
 })
@@ -26,10 +27,10 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {  
     console.log(req.body)
     try {
-        const user = await User.findOne({name: req.body.name})
+        const user = await User.findOne({email: req.body.email})
 
         if (!user) {
-            res.status(401).json("No user with that name!") 
+            res.status(401).json("No user with that email!") 
         } else {  
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SECRET)
             const DBpassword = hashedPassword.toString(CryptoJS.enc.Utf8)
