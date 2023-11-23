@@ -5,7 +5,7 @@ WORKDIR /api
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm install --network-timeout 1000000
+RUN npm install 
 
 COPY . .
 
